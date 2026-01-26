@@ -432,10 +432,10 @@ chroot_fnnas() {
     mkdir -p "${out_path}/${kernel_out}"
 
     # Create tar.gz files
-    tar -czf "${out_path}/${kernel_out}/boot-${platform_name}-${kernel_version}.tar.gz" -C "${tmp_outpath}/boot" .
-    tar -czf "${out_path}/${kernel_out}/dtb-${platform_name}-${kernel_version}.tar.gz" -C "${tmp_outpath}/dtb" .
-    tar -czf "${out_path}/${kernel_out}/modules-${platform_name}-${kernel_version}.tar.gz" -C "${tmp_outpath}/modules" .
-    tar -czf "${out_path}/${kernel_out}/header-${platform_name}-${kernel_version}.tar.gz" -C "${tmp_outpath}/headers" .
+    (cd "${tmp_outpath}/boot" && tar -czf "${out_path}/${kernel_out}/boot-${platform_name}-${kernel_version}.tar.gz" *)
+    (cd "${tmp_outpath}/dtb" && tar -czf "${out_path}/${kernel_out}/dtb-${platform_name}-${kernel_version}.tar.gz" *)
+    (cd "${tmp_outpath}/modules" && tar -czf "${out_path}/${kernel_out}/modules-${platform_name}-${kernel_version}.tar.gz" *)
+    (cd "${tmp_outpath}/headers" && tar -czf "${out_path}/${kernel_out}/header-${platform_name}-${kernel_version}.tar.gz" *)
 
     # Add sha256sum integrity verification file
     echo -e "${INFO} Generating sha256sums file..."
